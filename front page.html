@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>柚子的個人網站</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #00ff00;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .typing {
+      white-space: pre-wrap;
+      border-right: 2px solid #00ff00;
+      overflow: hidden;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      border-top: 1px solid #00ff00;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>柚子的個人網站</h1>
+    <nav>
+      <a href="front page.html">首頁</a>
+      <a href="projects.html">專案</a>
+      <a href="experience.html">經歷</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="typing" id="intro"></div>
+  </main>
+
+  <footer>
+    <p>©  my 柚子(casper) | Powered by My wind</p>
+  </footer>
+
+  <script>
+    const text = `
+Welcome to grapefruit's terminal...
+
+> Hi，我是柚子(casper)，目前是一名樟樹國際實中的高三學生。
+> 在這個網站，你可以找到我的專案、經歷，以及聯繫方式。
+> 以下是我的聯繫方式，有想法與建議可以私訊給我(,,・ω・,,) 。
+
+📬 聯繫我：
+   <p>Email: <a href="https://casp3790er@gmail.com">my is @gmail.com</a></p>
+   <p>GitHub: <a href="https://github.com/casper3790">github.com/casper3790</a></p>
+   <p>Instagram: <a href="https://instagram.com/casp3790er">instagram.com/casper3790</a></p>
+   <p>LinkedIn: <a href="https://linkedin.com/in/casper3790">linkedin.com/in/casper3790</a></p>
+`;
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        document.getElementById("intro").textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, 40);
+      }
+    }
+    typing();
+  </script>
+</body>
+</html>

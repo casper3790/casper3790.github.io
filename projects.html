@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>目前製作的專案(current projects) - grapefruit cmd </title>
+  <style>
+    body { background:black; color:#00ff00; font-family:"Courier New", monospace; padding:20px; }
+    #terminal { white-space:pre-wrap; min-height:300px; }
+    .cursor { display:inline-block; width:10px; background:#00ff00; animation:blink 1s infinite; }
+    @keyframes blink { 0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;} }
+    #input-line {
+      display: flex;
+      margin-top: 10px;
+    }
+    #prompt {
+      margin-right: 5px;
+    }
+    #command {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      outline: none;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+
+  <!-- 模擬輸入框 -->
+  <div id="input-line">
+    <span id="prompt">getElementById@terminal:~$</span>
+    <input type="text" id="command" autofocus />
+  </div>
+
+  <script>
+    const lines = [
+      "getElementById@terminal:~$ man  experience.log",
+      "--AI輔助天氣預報平台--前端設計+資安整合",
+      "--個人網站架設--網頁設計",
+      "--開發弱勢老人關懷APP--提供年長者適用的工具",
+      "--參加勞動部技能檢定--電腦硬體裝修乙級",
+      "--參加資訊安全相關競賽及研習",
+      "--參加國內外資訊相關研習與交流",
+      "輸入 'front page.html' 回首頁 (return to home page)",
+      "輸入 'projects.html' 看所有經歷 (all experience)"
+    ];
+
+    let i = 0, line = 0;
+    function typeLine() {
+      if (line < lines.length) {
+        if (i < lines[line].length) {
+          document.getElementById("terminal").textContent += lines[line][i];
+          i++;
+          setTimeout(typeLine, 40);
+        } else {
+          document.getElementById("terminal").textContent += "\n";
+          line++;
+          i = 0;
+          setTimeout(typeLine, 200);
+        }
+      }
+    }
+    typeLine();
+
+    // 模擬輸入指令
+    document.getElementById("command").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const cmd = this.value.trim();
+        const terminal = document.getElementById("terminal");
+
+        terminal.textContent += "新富@casp3790er:~$ " + cmd + "\n";
+        this.value = "";
+
+        if (cmd === "index.html") {
+          window.location.href = "index.html";
+        } else if (cmd === "projects.html") {
+          window.location.href = "projects.html";
+        } else if (cmd === "experience.html") {
+          terminal.textContent += "已經在 experience.html\n";
+        } else {
+          terminal.textContent += "bash: " + cmd + ": command not found\n";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

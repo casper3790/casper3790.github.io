@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>所有經歷(all experience) - <casp3790er class="exe"></casp3790er></title>
+  <style>
+    body { background:black; color:#00ff00; font-family:"Courier New", monospace; padding:20px; }
+    #terminal { white-space:pre-wrap; min-height:300px; }
+    .cursor { display:inline-block; width:10px; background:#00ff00; animation:blink 1s infinite; }
+    @keyframes blink { 0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;} }
+    #input-line {
+      display: flex;
+      margin-top: 10px;
+    }
+    #prompt {
+      margin-right: 5px;
+    }
+    #command {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      outline: none;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+
+  <!-- 模擬輸入框 -->
+  <div id="input-line">
+    <span id="prompt">getElementById@terminal:~$</span>
+    <input type="text" id="command" autofocus />
+  </div>
+
+  <script>
+    const lines = [
+      "getElementById@cmd:~$ man Grapefruit.txt",
+      "--目前的幹部職位--",
+      "---2025 - 內湖高工資安專班 助教",
+      "---2025 - 高中生環境保護組織 資訊維護組 ",
+      "---2025 - 樟樹國際實創中學 資訊科幹部",
+      "--曾經的幹部職位--",
+      "---2011~2025-震武跆拳道-助教、雙節棍-助教",
+      "---2023~2024-樟樹實中朝會服務小隊 -口令官",
+      "---2023-臺北市立水上救生協會-救生員",
+      "---2023-秀峰高中附屬國中部射箭隊-隊長",
+      "--曾經參加過的研習與營隊--",
+      "---2025-SUMMER APCS 運算思維實作培育營隊",
+      "---2025-台大量子計算暑期學習營隊",
+      "---2025-北區高中職程式安全黑客松",
+      "--參加的會議--",
+      "---2025-開源人年會(柚子)",
+      "---2025-國際資安組織大會",
+      "---2025-AWS SUMMIT TAIPEL會議",
+      "---2025-CTF資安種子培訓交流會",
+      "---2025-AIT TechGirls x AIS3 資安會議",
+      "---2025-中部高中電資社團網頁開發研習",
+      "--所有競賽名次--",
+      "---2024-全國PowerTech機器人-造型第一名QAQ",
+      "---2025-北區高中職資通安全競賽-第四名",
+      "---2024-宜蘭國際童玩節跆拳道錦標賽高中男子組第一名",
+      "---2024-台北市國際中正盃跆拳道錦標賽高中男子組第三名",
+      "---2023-台北市理事長盃暨國際跆拳道錦標賽第一名",
+      "---2023-台北市理事長盃暨國際跆拳道錦標賽混雙第二名",
+      "---2023-台北市中正盃暨國際跆拳道錦標賽第二名",
+      "---2023-新北市主委盃暨國際跆拳道錦標賽第一名",
+      "---2023-新北市體育總會射箭委員會第八名",
+      "--未來的目標--",
+      "---2025-精進資安專長",
+      "---2025-參與更多開源專案，貢獻自己的力量",
+      "---2025-推廣資安意識，讓更多人了解資安的重要性",
+      "---未來會把弱勢年長者，製作一款APP供應給年長者適用",
+
+      "輸入 'front page.html' 回首頁(return to home page)",
+      "輸入 'projects.html' 查看經歷(return to experience paged)",
+    ];
+
+    let i = 0, line = 0;
+    function typeLine() {
+      if (line < lines.length) {
+        if (i < lines[line].length) {
+          document.getElementById("terminal").textContent += lines[line][i];
+          i++;
+          setTimeout(typeLine, 40);
+        } else {
+          document.getElementById("terminal").textContent += "\n";
+          line++;
+          i = 0;
+          setTimeout(typeLine, 200);
+        }
+      }
+    }
+    typeLine();
+
+    // 模擬輸入指令
+    document.getElementById("command").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const cmd = this.value.trim();
+        const terminal = document.getElementById("terminal");
+
+        terminal.textContent += "casper@terminal:~$ " + cmd + "\n";
+        this.value = "";
+
+        if (cmd === "index.html") {
+          window.location.href = "index.html";
+        } else if (cmd === "projects.html") {
+          terminal.textContent += "已經在 projects.html\n";
+        } else if (cmd === "experience.html") {
+          window.location.href = "experience.html";
+        } else {
+          terminal.textContent += "bash: " + cmd + ": command not found\n";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
